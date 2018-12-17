@@ -1,6 +1,6 @@
 package com.samuele.orm.repositories;
  
-import org.junit.Test;       
+import org.junit.Test;        
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -13,6 +13,8 @@ import com.samuele.orm.repositories.AeroportoRepository;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
+
+//prova test
  
 @RunWith(SpringRunner.class)
 @DataJpaTest
