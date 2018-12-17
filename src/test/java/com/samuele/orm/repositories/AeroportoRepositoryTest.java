@@ -14,8 +14,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
-//prova test
- 
 @RunWith(SpringRunner.class)
 @DataJpaTest
 public class AeroportoRepositoryTest {
