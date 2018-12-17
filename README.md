@@ -14,7 +14,7 @@ Per il progetto si è scelto di modellare il dominio rappresentante i voli, seco
 
 Nello specifico si è sfruttato il FrameWork Spring che mette a disposizione un'implementazione del modello JPA.
 
-Le classi modellate sono quattro:
+Le entità modellate sono quattro:
 
 * CompagniaAerea che rappresenta la compagnia che offre il volo.
 * Aereo che rappresenta l'aeromobile utilizzato per il viaggio.
