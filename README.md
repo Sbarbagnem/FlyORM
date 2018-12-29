@@ -10,7 +10,7 @@ Repository gitlab: https://gitlab.com/s.ventura/assignment3.git
 
 Per il progetto si è scelto di modellare il dominio rappresentante i voli, secondo il seguente schema:
 
-![](/home/samuele/Assignment3/Schema/schema.png)
+![](schema.png)
 
 Nello specifico si è sfruttato il FrameWork Spring che mette a disposizione un'implementazione del modello JPA.
 
