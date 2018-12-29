@@ -3,6 +3,7 @@ package com.samuele.orm.entities;
 import java.util.List; 
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,10 +17,13 @@ public class Aeroporto {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	private long id;
 	
+	@Column(nullable=false)
 	private String nome;
+	@Column(nullable=false)
 	private String città;
+	@Column(nullable=false)
 	private String nazione;
 	
     @OneToMany(mappedBy = "AeroportoArrivo",
@@ -66,7 +70,7 @@ public class Aeroporto {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -85,6 +89,8 @@ public class Aeroporto {
 	public void setVoliInArrivo(List<Volo> voliInArrivo) {
 		this.voliInArrivo = voliInArrivo;
 	}
+	
+	
 
 	@Override
 	public String toString() {

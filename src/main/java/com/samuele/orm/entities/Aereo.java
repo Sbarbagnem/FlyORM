@@ -1,6 +1,5 @@
 package com.samuele.orm.entities;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
@@ -19,16 +18,12 @@ public class Aereo {
 	@Column(nullable = false)
 	private String modello;
 	
-	@Column(nullable = false)
-	private Date annoAcquisto;
-	
 	@OneToMany(mappedBy = "aereo")
 	private List<Volo> voli;
 
-	public Aereo(String marca, String modello, Date annoAcquisto) {
+	public Aereo(String marca, String modello) {
 		this.marca = marca;
 		this.modello = modello;
-		this.annoAcquisto = annoAcquisto;
 	}
 
 	public long getId() {
@@ -55,17 +50,9 @@ public class Aereo {
 		this.modello = modello;
 	}
 
-	public Date getAnnoAcquisto() {
-		return annoAcquisto;
-	}
-
-	public void setAnnoAcquisto(Date annoAcquisto) {
-		this.annoAcquisto = annoAcquisto;
-	}
-
 	@Override
 	public String toString() {
-		return "Aereo [id=" + id + ", marca=" + marca + ", modello=" + modello + ", annoAcquisto=" + annoAcquisto + "]";
+		return "Aereo [id=" + id + ", marca=" + marca + ", modello=" + modello + "]";
 	}
 
 }

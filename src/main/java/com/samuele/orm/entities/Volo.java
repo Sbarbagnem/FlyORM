@@ -3,6 +3,7 @@ package com.samuele.orm.entities;
 import java.io.Serializable;      
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,9 +23,11 @@ public class Volo implements Serializable{
 	private long id;
 
 	@Temporal(TemporalType.DATE)
+	@Column(nullable=false)
 	private Date dataPartenza;
 	
 	@Temporal(TemporalType.DATE)
+	@Column(nullable=false)
 	private Date dataArrivo;
 	
 	@ManyToOne

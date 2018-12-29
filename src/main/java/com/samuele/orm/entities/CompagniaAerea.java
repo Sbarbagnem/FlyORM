@@ -12,7 +12,10 @@ public class CompagniaAerea {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
+	@Column(nullable=false)
 	private String nome;
+	
+	@Column(nullable=false)
 	private String nazione;
 	
 	@ManyToOne(cascade={CascadeType.ALL})

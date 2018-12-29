@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.samuele.orm.entities.Aeroporto;
 
 @Repository
-public interface AeroportoRepository extends JpaRepository<Aeroporto, Integer>{
+public interface AeroportoRepository extends JpaRepository<Aeroporto, Long>{
 	
 	public List<Aeroporto> findByNome(String nome);
 	public List<Aeroporto> findByCittà(String città);
