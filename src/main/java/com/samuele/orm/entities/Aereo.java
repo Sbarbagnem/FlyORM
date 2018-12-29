@@ -1,7 +1,5 @@
 package com.samuele.orm.entities;
 
-import java.util.List;
-
 import javax.persistence.*;
 
 @Entity
@@ -17,9 +15,6 @@ public class Aereo {
 	
 	@Column(nullable = false)
 	private String modello;
-	
-	@OneToMany(mappedBy = "aereo")
-	private List<Volo> voli;
 
 	public Aereo(String marca, String modello) {
 		this.marca = marca;

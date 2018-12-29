@@ -21,20 +21,22 @@ public class Aeroporto {
 	
 	@Column(nullable=false)
 	private String nome;
+	
 	@Column(nullable=false)
 	private String città;
+	
 	@Column(nullable=false)
 	private String nazione;
 	
-    @OneToMany(mappedBy = "AeroportoArrivo",
-    			cascade = CascadeType.ALL,
-    			orphanRemoval = true)
-    private List<Volo> voliInPartenza;
-    
-    @OneToMany(mappedBy = "AeroportoPartenza",
-			cascade = CascadeType.ALL,
-			orphanRemoval = true)
-    private List<Volo> voliInArrivo;
+//    @OneToMany(mappedBy = "AeroportoArrivo",
+//    			cascade = CascadeType.ALL,
+//    			orphanRemoval = true)
+//    private List<Volo> voliInPartenza;
+//    
+//    @OneToMany(mappedBy = "AeroportoPartenza",
+//			cascade = CascadeType.ALL,
+//			orphanRemoval = true)
+//    private List<Volo> voliInArrivo;
 	
 	public Aeroporto(String nome, String città, String nazione) {
 		this.nome = nome;
@@ -74,28 +76,29 @@ public class Aeroporto {
 		this.id = id;
 	}
 
-	public List<Volo> getVoliInPartenza() {
-		return voliInPartenza;
-	}
-
-	public void setVoliInPartenza(List<Volo> voliInPartenza) {
-		this.voliInPartenza = voliInPartenza;
-	}
-
-	public List<Volo> getVoliInArrivo() {
-		return voliInArrivo;
-	}
-
-	public void setVoliInArrivo(List<Volo> voliInArrivo) {
-		this.voliInArrivo = voliInArrivo;
-	}
+//	public List<Volo> getVoliInPartenza() {
+//		return voliInPartenza;
+//	}
+//
+//	public void setVoliInPartenza(List<Volo> voliInPartenza) {
+//		this.voliInPartenza = voliInPartenza;
+//	}
+//
+//	public List<Volo> getVoliInArrivo() {
+//		return voliInArrivo;
+//	}
+//
+//	public void setVoliInArrivo(List<Volo> voliInArrivo) {
+//		this.voliInArrivo = voliInArrivo;
+//	}
 	
 	
 
 	@Override
 	public String toString() {
 		return "Aeroporto [id=" + id + ", nome=" + nome + ", città=" + città + ", nazione=" + nazione
-				+ ", voliInPartenza=" + voliInPartenza + ", voliInArrivo=" + voliInArrivo + "]";
+//				+ ", voliInPartenza=" + voliInPartenza + ", voliInArrivo=" + voliInArrivo + "]";
+				+ "]";
 	}
 	
 	

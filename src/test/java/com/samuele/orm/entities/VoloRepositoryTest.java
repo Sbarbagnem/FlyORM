@@ -15,6 +15,11 @@ public class VoloRepositoryTest {
 	@Autowired
 	private VoloRepository VoloRepo;
 	
+	private	CompagniaAerea	c1;
+	private	Aeroporto a1;
+	private Aeroporto a2;
+	private Aereo aereo1;
+	
 	@Test
 	public void createVoloTest() {
 		

@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.util.List;
 import java.util.Optional;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +21,20 @@ public class AereoRepositoryTest {
 	@Autowired
 	private AereoRepository aereoRepo;
 	
+	private Aereo a1;
+	private Aereo a2;
+	
+	@Before
+	public void setUp() {
+		
+		a1 = new Aereo("Airbus", "A300");
+		a2 = new Aereo("Boeing", "757");
+
+	}
+	
 	@Test
 	public void testCreateAndRead() {
-		
-		Aereo a1 = new Aereo("Airbus", "A300");
-		Aereo a2 = new Aereo("Boeing", "757");
-		
+				
 		aereoRepo.saveAndFlush(a1);
 		aereoRepo.saveAndFlush(a2);
 		
@@ -43,7 +52,6 @@ public class AereoRepositoryTest {
 	@Test
 	public void testUpdate() {
 		
-		Aereo a1 = new Aereo("Airbus", "A300");
 		aereoRepo.saveAndFlush(a1);
 		
 		a1.setModello("A301");
@@ -57,8 +65,7 @@ public class AereoRepositoryTest {
 	
 	@Test
 	public void testDelete() {
-		
-		Aereo a1 = new Aereo("Airbus", "A300");
+
 		aereoRepo.saveAndFlush(a1);
 		
 		Optional<Aereo> aereo = aereoRepo.findById(a1.getId());

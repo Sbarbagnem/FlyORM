@@ -1,5 +1,6 @@
 package com.samuele.orm.entities;
 
+import java.util.ArrayList; 
 import java.util.List; 
 
 import javax.persistence.*;
@@ -18,21 +19,21 @@ public class CompagniaAerea {
 	@Column(nullable=false)
 	private String nazione;
 	
-	@ManyToOne(cascade={CascadeType.ALL})
+	@ManyToOne(cascade={CascadeType.MERGE})
 	@JoinColumn(name="compagniaGruppo_id")
 	private CompagniaAerea compagniaGruppo;
 
 	@OneToMany(mappedBy="compagniaGruppo")
-	private List<CompagniaAerea> compagnieSub;
+	private List<CompagniaAerea> compagnieSub = new ArrayList<>();
 	
 	@OneToMany(mappedBy="compagnia")
-	private List<Volo> voli;
+	private List<Volo> voli = new ArrayList<>();
 	
-	public CompagniaAerea(long id, String nome, String nazione) {
+	public CompagniaAerea(String nome, String nazione, CompagniaAerea compagniaGruppo) {
 		super();
-		this.id = id;
 		this.nome = nome;
 		this.nazione = nazione;
+		this.compagniaGruppo = compagniaGruppo;
 	}
 
 	public long getId() {
@@ -74,6 +75,15 @@ public class CompagniaAerea {
 
 	public void setCompagniaGruppo(CompagniaAerea compagniaGruppo) {
 		this.compagniaGruppo = compagniaGruppo;
+	}
+	
+
+	public List<CompagniaAerea> getCompagnieSub() {
+		return compagnieSub;
+	}
+
+	public void setCompagnieSub(List<CompagniaAerea> compagnieSub) {
+		this.compagnieSub = compagnieSub;
 	}
 
 	@Override

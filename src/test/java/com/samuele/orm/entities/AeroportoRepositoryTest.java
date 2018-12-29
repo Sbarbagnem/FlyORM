@@ -1,5 +1,6 @@
 package com.samuele.orm.entities;
  
+import org.junit.Before;
 import org.junit.Test;          
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +23,19 @@ public class AeroportoRepositoryTest {
 	@Autowired
 	private AeroportoRepository aeroportoRepo;
 	
-	@Test
-	public void testCreateAndRead() {
+	private Aeroporto a1;
+	
+	@Before
+	public void setUp() {
 		
-		Aeroporto a1 = new Aeroporto("Malpensa", "Milano", "Italia");
-		
+		a1 = new Aeroporto("Malpensa", "Milano", "Italia");
 		aeroportoRepo.saveAndFlush(a1);
 		
+	}
+	
+	@Test
+	public void testCreateAndRead() {
+			
 		Optional<Aeroporto> a2 = aeroportoRepo.findById(a1.getId());
 
 		assertEquals(a1.getId(), a2.get().getId());
@@ -36,10 +43,6 @@ public class AeroportoRepositoryTest {
 	
 	@Test
 	public void testUpdate() {
-		
-		Aeroporto a1 = new Aeroporto("Malpensa", "Milano", "Italia");
-		
-		aeroportoRepo.saveAndFlush(a1);
 		
 		Optional<Aeroporto> a2 = aeroportoRepo.findById(a1.getId());
 		
@@ -57,10 +60,6 @@ public class AeroportoRepositoryTest {
 	@Test
 	public void testDelete() {
 		
-		Aeroporto a1 = new Aeroporto("Maplensa", "Milano", "Italia");
-		
-		aeroportoRepo.saveAndFlush(a1);
-		
 		List<Aeroporto> aeroporti = aeroportoRepo.findAll();
 		
 		assertEquals(1, aeroporti.size());
@@ -75,10 +74,6 @@ public class AeroportoRepositoryTest {
 
 	@Test
 	public void testFindByName() {
-	
-		Aeroporto a1 = new Aeroporto("Malpensa", "Milano", "Italia");
-		
-		aeroportoRepo.saveAndFlush(a1);
 		
 		List<Aeroporto> aeroporti = aeroportoRepo.findByNome(a1.getNome());
 		
@@ -88,14 +83,12 @@ public class AeroportoRepositoryTest {
 	@Test
 	// testo ricerca di tutti gli aeroporti nella città di una nazione
 	public void testFindByNazioneAndCittà() {
-		
-		Aeroporto a1 = new Aeroporto("Malpensa", "Milano", "Italia");
+
 		Aeroporto a2 = new Aeroporto("Linate", "Milano", "Italia");
 		Aeroporto a3 = new Aeroporto("Sydney", "Sydney", "Australia");
 		Aeroporto a4 = new Aeroporto("Sydney", "Sydney", "Canada");
 		Aeroporto a5 = new Aeroporto("Ciampino", "Roma", "Italia");
 		
-		aeroportoRepo.saveAndFlush(a1);
 		aeroportoRepo.saveAndFlush(a2);
 		aeroportoRepo.saveAndFlush(a3);
 		aeroportoRepo.saveAndFlush(a4);
