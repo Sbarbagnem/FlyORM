@@ -113,13 +113,13 @@ public class CompagniaAereaRepositoryTest {
 //		compagniaRepo.saveAndFlush(c1_1);
 //		compagniaRepo.saveAndFlush(c1_2);
 //		
-//		c1.getCompagnieSub().add(c1_1);
-//		c1.getCompagnieSub().add(c1_1);
+//		c1_1.setCompagniaGruppo(c1);
+//		c1_2.setCompagniaGruppo(c1);
 //		
-//		CompagniaAerea capoGruppo = compagniaRepo.findById(c1.getId()).get();
-//		List<CompagniaAerea> subGruppo = capoGruppo.getCompagnieSub();
+////		CompagniaAerea capoGruppo = compagniaRepo.findById(c1.getId()).get();
+////		List<CompagniaAerea> subGruppo = capoGruppo.getCompagnieSub();
 //		
-//		assertEquals(2, subGruppo.size());
+////		assertEquals(2, subGruppo.size());
 //		
 //		// cancello la compagnia a capo del gruppo
 //		compagniaRepo.delete(c1);
@@ -128,5 +128,5 @@ public class CompagniaAereaRepositoryTest {
 //		
 //		assertNull(compagnia.getCompagniaGruppo());
 //	}
-
+//
 }

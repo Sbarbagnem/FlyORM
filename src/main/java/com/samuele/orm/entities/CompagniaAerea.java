@@ -1,7 +1,7 @@
 package com.samuele.orm.entities;
 
-import java.util.ArrayList; 
-import java.util.List; 
+//import java.util.ArrayList;  
+//import java.util.List; 
 
 import javax.persistence.*;
 
@@ -23,11 +23,11 @@ public class CompagniaAerea {
 	@JoinColumn(name="compagniaGruppo_id")
 	private CompagniaAerea compagniaGruppo;
 
-	@OneToMany(mappedBy="compagniaGruppo")
-	private List<CompagniaAerea> compagnieSub = new ArrayList<>();
+//	@OneToMany(mappedBy="compagniaGruppo")
+//	private List<CompagniaAerea> compagnieSub = new ArrayList<>();
 	
-	@OneToMany(mappedBy="compagnia")
-	private List<Volo> voli = new ArrayList<>();
+//	@OneToMany(mappedBy="compagnia")
+//	private List<Volo> voli = new ArrayList<>();
 	
 	public CompagniaAerea(String nome, String nazione, CompagniaAerea compagniaGruppo) {
 		super();
@@ -60,13 +60,13 @@ public class CompagniaAerea {
 		this.nazione = nazione;
 	}
 
-	public List<Volo> getVoli() {
-		return voli;
-	}
-
-	public void setVoli(List<Volo> voli) {
-		this.voli = voli;
-	}
+//	public List<Volo> getVoli() {
+//		return voli;
+//	}
+//
+//	public void setVoli(List<Volo> voli) {
+//		this.voli = voli;
+//	}
 	
 
 	public CompagniaAerea getCompagniaGruppo() {
@@ -78,18 +78,19 @@ public class CompagniaAerea {
 	}
 	
 
-	public List<CompagniaAerea> getCompagnieSub() {
-		return compagnieSub;
-	}
-
-	public void setCompagnieSub(List<CompagniaAerea> compagnieSub) {
-		this.compagnieSub = compagnieSub;
-	}
+//	public List<CompagniaAerea> getCompagnieSub() {
+//		return compagnieSub;
+//	}
+//
+//	public void setCompagnieSub(List<CompagniaAerea> compagnieSub) {
+//		this.compagnieSub = compagnieSub;
+//	}
 
 	@Override
 	public String toString() {
 		return "CompagniaAerea [id=" + id + ", nome=" + nome + ", nazione=" + nazione + ", compagniaGruppo="
-				+ compagniaGruppo + ", voli=" + voli + "]";
+//				+ compagniaGruppo + ", voli=" + voli + "]";
+				+ compagniaGruppo + "]";
 	}
 	
 	
