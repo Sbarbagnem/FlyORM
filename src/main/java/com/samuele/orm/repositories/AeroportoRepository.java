@@ -1,18 +1,51 @@
 package com.samuele.orm.repositories;
 
-import java.util.List;  
-
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+import java.util.List;
 
 import com.samuele.orm.entities.Aeroporto;
 
-@Repository
-public interface AeroportoRepository extends JpaRepository<Aeroporto, Long>{
+public class AeroportoRepository extends Repository<Aeroporto, Long> {
 	
-	public List<Aeroporto> findByNome(String nome);
-	public List<Aeroporto> findByCittà(String città);
-	public List<Aeroporto> findByNazione(String nazione);
-	public List<Aeroporto> findByNazioneAndCittà(String nazione, String città);
+	public AeroportoRepository() {}
+
+	@Override
+	public Aeroporto create(Aeroporto entity) {
+		getEntityManager().persist(entity);
+		return entity;
+	}
+
+	@Override
+	public Aeroporto get(Long id) {
+		return getEntityManager().find(Aeroporto.class, id);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Aeroporto> getAll() {
+		return getEntityManager().createQuery("FROM Aeroporto").getResultList();
+	}
+
+	@Override
+	public Aeroporto update(Aeroporto entity) {
+		return getEntityManager().merge(entity);
+	}
+
+	@Override
+	public void delete(Aeroporto entity) {
+		deleteById(entity.getId());
+		
+	}
+	
+	@Override
+	public void deleteById(Long id) {
+		getEntityManager().remove(get(id));
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Aeroporto> search(String field, String value) {
+		String query = "SELECT m FROM Aeroporto m WHERE m." + field + " LIKE '%"+value+"%'";
+    	return getEntityManager().createQuery(query).getResultList();
+	}
 
 }

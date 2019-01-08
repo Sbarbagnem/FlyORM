@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+  
+  <persistence-unit name="fly" transaction-type="RESOURCE_LOCAL">
+	<provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <class>com.samuele.orm.entities.Aereo</class>
+    <class>com.samuele.orm.entities.Aeroporto</class>
+    <class>com.samuele.orm.entities.CompagniaAerea</class>
+    <class>com.samuele.orm.entities.Volo</class>
+    
+    <properties>
+      <property name="hibernate.hbm2ddl.auto" value="create"/>
+	  <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/voliDB"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
+      <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
+      <property name="hibernate.connection.username" value="prova"/>
+      <property name="hibernate.connection.password" value="prova"/>
+      <property name="hibernate.show_sql" value="flase"/>
+    </properties>
+
+  </persistence-unit>
+
+</persistence>

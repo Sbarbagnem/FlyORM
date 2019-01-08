@@ -1,5 +1,8 @@
 package com.samuele.orm.entities;
 
+import java.util.ArrayList; 
+import java.util.List;
+
 //import java.util.ArrayList;  
 //import java.util.List; 
 
@@ -13,21 +16,20 @@ public class CompagniaAerea {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@Column(nullable=false)
+	@Column(nullable=false, unique=true)
 	private String nome;
 	
 	@Column(nullable=false)
 	private String nazione;
 	
-	@ManyToOne(cascade={CascadeType.MERGE})
-	@JoinColumn(name="compagniaGruppo_id")
+	@ManyToOne
 	private CompagniaAerea compagniaGruppo;
 
-//	@OneToMany(mappedBy="compagniaGruppo")
-//	private List<CompagniaAerea> compagnieSub = new ArrayList<>();
+	@OneToMany(mappedBy="compagniaGruppo", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true) 
+	private List<CompagniaAerea> compagnieSub = new ArrayList<>();
 	
-//	@OneToMany(mappedBy="compagnia")
-//	private List<Volo> voli = new ArrayList<>();
+//	@OneToMany(mappedBy = "compagniaAerea_id", cascade = CascadeType.MERGE, orphanRemoval = true)
+//	private List<Volo> voliOfferti = new ArrayList<>();
 	
 	public CompagniaAerea(String nome, String nazione, CompagniaAerea compagniaGruppo) {
 		super();
@@ -58,16 +60,7 @@ public class CompagniaAerea {
 
 	public void setNazione(String nazione) {
 		this.nazione = nazione;
-	}
-
-//	public List<Volo> getVoli() {
-//		return voli;
-//	}
-//
-//	public void setVoli(List<Volo> voli) {
-//		this.voli = voli;
-//	}
-	
+	}	
 
 	public CompagniaAerea getCompagniaGruppo() {
 		return compagniaGruppo;
@@ -76,20 +69,26 @@ public class CompagniaAerea {
 	public void setCompagniaGruppo(CompagniaAerea compagniaGruppo) {
 		this.compagniaGruppo = compagniaGruppo;
 	}
-	
 
-//	public List<CompagniaAerea> getCompagnieSub() {
-//		return compagnieSub;
+	public List<CompagniaAerea> getCompagnieSub() {
+		return compagnieSub;
+	}
+
+	public void setCompagnieSub(List<CompagniaAerea> compagnieSub) {
+		this.compagnieSub = compagnieSub;
+	}
+
+//	public List<Volo> getVoliOfferti() {
+//		return voliOfferti;
 //	}
 //
-//	public void setCompagnieSub(List<CompagniaAerea> compagnieSub) {
-//		this.compagnieSub = compagnieSub;
+//	public void setVoliOfferti(List<Volo> voliOfferti) {
+//		this.voliOfferti = voliOfferti;
 //	}
 
 	@Override
 	public String toString() {
 		return "CompagniaAerea [id=" + id + ", nome=" + nome + ", nazione=" + nazione + ", compagniaGruppo="
-//				+ compagniaGruppo + ", voli=" + voli + "]";
 				+ compagniaGruppo + "]";
 	}
 	

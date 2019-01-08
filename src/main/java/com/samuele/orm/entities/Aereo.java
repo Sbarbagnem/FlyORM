@@ -3,7 +3,7 @@ package com.samuele.orm.entities;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "aereo")
+@Table(name = "aereo", uniqueConstraints= {@UniqueConstraint(columnNames ={"marca","modello"})})
 public class Aereo {
 	
 	@Id

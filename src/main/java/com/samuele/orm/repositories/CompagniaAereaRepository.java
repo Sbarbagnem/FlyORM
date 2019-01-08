@@ -1,9 +1,49 @@
 package com.samuele.orm.repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
 
 import com.samuele.orm.entities.CompagniaAerea;
 
-public interface CompagniaAereaRepository extends JpaRepository<CompagniaAerea,Long > {
+public class CompagniaAereaRepository extends Repository<CompagniaAerea, Long> {
+	
+	public CompagniaAereaRepository() {}
 
+	@Override
+	public CompagniaAerea create(CompagniaAerea entity) {
+		getEntityManager().persist(entity);
+		return entity;
+	}
+
+	@Override
+	public CompagniaAerea get(Long id) {
+		return getEntityManager().find(CompagniaAerea.class, id);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CompagniaAerea> getAll() {
+		return getEntityManager().createQuery("FROM CompagniaAerea").getResultList();
+	}
+
+	@Override
+	public CompagniaAerea update(CompagniaAerea entity) {
+		return getEntityManager().merge(entity);
+	}
+
+	@Override
+	public void delete(CompagniaAerea entity) {
+		deleteById(entity.getId());
+	}
+	
+	@Override
+	public void deleteById(Long id) {
+		getEntityManager().remove(get(id));
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CompagniaAerea> search(String field, String value) {
+		String query = "SELECT m FROM CompagniaAerea m WHERE m." + field + " LIKE '%"+value+"%'";
+    	return getEntityManager().createQuery(query).getResultList();
+	}
 }

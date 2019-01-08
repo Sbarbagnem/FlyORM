@@ -1,4 +1,4 @@
-package com.samuele.orm.entities;
+package com.samuele.orm.repositories;
 
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;

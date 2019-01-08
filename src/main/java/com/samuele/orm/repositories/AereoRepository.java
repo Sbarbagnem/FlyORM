@@ -1,11 +1,49 @@
 package com.samuele.orm.repositories;
 
-import org.springframework.data.jpa.repository.JpaRepository; 
+import java.util.List; 
 
 import com.samuele.orm.entities.Aereo;
 
-public interface AereoRepository extends JpaRepository<Aereo, Long> {
+public class AereoRepository extends Repository<Aereo, Long> {
 	
+	public AereoRepository() {}
 	
+	@Override
+	public Aereo create(Aereo entity) {
+		getEntityManager().persist(entity);
+		return entity;
+	}
 
+	@Override
+	public Aereo get(Long id) {
+		return getEntityManager().find(Aereo.class, id);
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Aereo> getAll() {
+		return getEntityManager().createQuery("FROM Aereo").getResultList();
+	}
+
+	@Override
+	public Aereo update(Aereo entity) {
+		return getEntityManager().merge(entity);
+	}
+
+	@Override
+	public void delete(Aereo entity) {
+		deleteById(entity.getId());
+	}
+	
+	@Override
+	public void deleteById(Long id) {
+		getEntityManager().remove(get(id));
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Aereo> search(String field, String value) {
+		String query = "SELECT m FROM Aereo WHERE m." + field + " = " + value;
+    	return getEntityManager().createQuery(query).getResultList();
+	}
 }
