@@ -1,4 +1,4 @@
-package com.samuele.orm.repositories;
+package com.samuele.orm.services;
 
 import static org.junit.Assert.assertEquals; 
 
@@ -17,11 +17,11 @@ import com.samuele.orm.services.CompagniaAereaService;
  
 //@RunWith(SpringRunner.class)
 //@DataJpaTest
-public class CompagniaAereaRepositoryTest {
+public class CompagniaAereaTest {
 	
 	private CompagniaAereaService service;
 	
-	public CompagniaAereaRepositoryTest() {
+	public CompagniaAereaTest() {
 		this.service = new CompagniaAereaService();
 	}
 

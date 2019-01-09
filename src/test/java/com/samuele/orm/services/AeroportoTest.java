@@ -1,4 +1,4 @@
-package com.samuele.orm.repositories;
+package com.samuele.orm.services;
  
 import org.junit.AfterClass; 
 import org.junit.Before;
@@ -23,11 +23,11 @@ import java.util.List;
 
 //@RunWith(SpringRunner.class)
 //@DataJpaTest
-public class AeroportoRepositoryTest {
+public class AeroportoTest {
 	
 	private AeroportoService service;
 	
-	public AeroportoRepositoryTest() {
+	public AeroportoTest() {
 		this.service = new AeroportoService();
 	}
 	

@@ -1,4 +1,4 @@
-package com.samuele.orm.repositories;
+package com.samuele.orm.services;
 
 import static org.junit.Assert.*;   
 
@@ -13,7 +13,7 @@ import com.samuele.orm.dbManager.DBManager;
 import com.samuele.orm.entities.*;
 import com.samuele.orm.services.*;
  
-public class VoloRepositoryTest {
+public class VoloTest {
 
 	private VoloService service;
 	private AereoService serviceAereo;
@@ -34,7 +34,7 @@ public class VoloRepositoryTest {
 	private Volo volo3;
 	
 	@SuppressWarnings("deprecation")
-	public VoloRepositoryTest(){
+	public VoloTest(){
 		
 		this.service = new VoloService();
 		this.serviceAereo = new AereoService();
