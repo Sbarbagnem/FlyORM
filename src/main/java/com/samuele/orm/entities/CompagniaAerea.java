@@ -13,7 +13,6 @@ import javax.persistence.*;
 public class CompagniaAerea {
 	
 	@Id
-	@Column(name = "compagnia_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
@@ -29,8 +28,8 @@ public class CompagniaAerea {
 	@OneToMany(mappedBy="compagniaGruppo", cascade = {CascadeType.MERGE, CascadeType.PERSIST}, orphanRemoval = true) 
 	private List<CompagniaAerea> compagnieSub = new ArrayList<>();
 	
-//	@OneToMany(mappedBy = "compagniaAerea_id", cascade = CascadeType.MERGE, orphanRemoval = true)
-//	private List<Volo> voliOfferti = new ArrayList<>();
+	@OneToMany(mappedBy = "compagnia", cascade = CascadeType.MERGE, orphanRemoval = true)
+	private List<Volo> voliOfferti = new ArrayList<>();
 	
 	public CompagniaAerea(String nome, String nazione, CompagniaAerea compagniaGruppo) {
 		super();
@@ -79,13 +78,13 @@ public class CompagniaAerea {
 		this.compagnieSub = compagnieSub;
 	}
 
-//	public List<Volo> getVoliOfferti() {
-//		return voliOfferti;
-//	}
-//
-//	public void setVoliOfferti(List<Volo> voliOfferti) {
-//		this.voliOfferti = voliOfferti;
-//	}
+	public List<Volo> getVoliOfferti() {
+		return voliOfferti;
+	}
+
+	public void setVoliOfferti(List<Volo> voliOfferti) {
+		this.voliOfferti = voliOfferti;
+	}
 
 	@Override
 	public String toString() {

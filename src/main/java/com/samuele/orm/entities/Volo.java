@@ -35,39 +35,23 @@ public class Volo {
 	private Date dataArrivo;
 	
 	@ManyToOne
-	@JoinColumn(name="aeroportoPartenza_id", referencedColumnName="aeroporto_id")
-	@Cascade({
-		CascadeType.MERGE
-	})
-	private Aeroporto AeroportoPartenza;
+	private Aeroporto aeroportoPartenza;
 
 	@ManyToOne
-	@JoinColumn(name="aeroportoArrivo_id", referencedColumnName="aeroporto_id")
-	@Cascade({
-		CascadeType.MERGE
-	})
-	private Aeroporto AeroportoArrivo;
+	private Aeroporto aeroportoArrivo;
 	
 	@ManyToOne
-	@JoinColumn(name="compagnia_id", referencedColumnName="compagnia_id")
-	@Cascade({
-		CascadeType.MERGE
-	})
 	private CompagniaAerea compagnia;
 	
 	@ManyToOne
-	@JoinColumn(name="aereo_id", referencedColumnName="aereo_id")
-	@Cascade({
-		CascadeType.MERGE
-	})
 	private Aereo aereo;
 		
-	public Volo(Date dataPartenza, Date dataArrivo, Aeroporto AeroportoPartenza,
-			Aeroporto AeroportoArrivo, CompagniaAerea compagnia, Aereo aereo) {
+	public Volo(Date dataPartenza, Date dataArrivo, Aeroporto aeroportoPartenza,
+			Aeroporto aeroportoArrivo, CompagniaAerea compagnia, Aereo aereo) {
 		this.dataPartenza = dataPartenza;
 		this.dataArrivo = dataArrivo;
-		this.AeroportoArrivo = AeroportoArrivo;
-		this.AeroportoPartenza = AeroportoPartenza;
+		this.aeroportoArrivo = aeroportoArrivo;
+		this.aeroportoPartenza = aeroportoPartenza;
 		this.compagnia = compagnia;
 		this.aereo = aereo;
 	}
@@ -97,19 +81,19 @@ public class Volo {
 	}
 
 	public Aeroporto getAeroportoPartenza() {
-		return AeroportoPartenza;
+		return aeroportoPartenza;
 	}
 
 	public void setAeroportoPartenza(Aeroporto aeroportoPartenza) {
-		AeroportoPartenza = aeroportoPartenza;
+		this.aeroportoPartenza = aeroportoPartenza;
 	}
 
 	public Aeroporto getAeroportoArrivo() {
-		return AeroportoArrivo;
+		return aeroportoArrivo;
 	}
 
 	public void setAeroportoArrivo(Aeroporto aeroportoArrivo) {
-		AeroportoArrivo = aeroportoArrivo;
+		this.aeroportoArrivo = aeroportoArrivo;
 	}
 
 	public CompagniaAerea getCompagnia() {
@@ -132,7 +116,7 @@ public class Volo {
 	@Override
 	public String toString() {
 		return "Volo [id=" + id + ", dataPartenza=" + dataPartenza + ", dataArrivo=" + dataArrivo
-				+ ", AeroportoPartenza=" + AeroportoPartenza + ", AeroportoArrivo=" + AeroportoArrivo + ", compagnia="
+				+ ", AeroportoPartenza=" + aeroportoPartenza + ", AeroportoArrivo=" + aeroportoArrivo + ", compagnia="
 				+ compagnia + ", aereo=" + aereo + "]";
 	}
 }

@@ -7,7 +7,6 @@ import javax.persistence.*;
 public class Aereo {
 	
 	@Id
-	@Column(name = "aereo_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
