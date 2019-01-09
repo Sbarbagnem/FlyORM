@@ -1,7 +1,11 @@
 package com.samuele.orm.repositories;
 
+import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Query;
+
+import com.samuele.orm.entities.Aeroporto;
 import com.samuele.orm.entities.Volo;
 
 public class VoloRepository extends Repository<Volo, Long> {
@@ -43,8 +47,8 @@ public class VoloRepository extends Repository<Volo, Long> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Volo> search(String field, String value) {
-		String query = "SELECT m FROM Volo m WHERE m." + field + " LIKE '%"+value+"%'";
-    	return getEntityManager().createQuery(query).getResultList();
+		Query q = getEntityManager().createQuery("SELECT a FROM Volo a WHERE a." + field + " LIKE :value");
+		q =	q.setParameter("value", value);
+		return	q.getResultList();
 	}
-
 }

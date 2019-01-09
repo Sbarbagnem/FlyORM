@@ -61,8 +61,10 @@ public class AeroportoService implements Services<Aeroporto, Long> {
 
 	@Override
 	public List<Aeroporto> search(String field, String value) {
-		// TODO Auto-generated method stub
-		return null;
+		repo.open();
+		List<Aeroporto> trovati = repo.search(field, value);
+		repo.close();
+		return trovati;
 	}
 
 }

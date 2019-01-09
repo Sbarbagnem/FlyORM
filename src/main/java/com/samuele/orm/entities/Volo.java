@@ -1,9 +1,8 @@
 package com.samuele.orm.entities;
-
-import java.io.Serializable;       
+         
 import java.util.Date;
 
-import javax.persistence.CascadeType;
+//import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,10 +13,10 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
  
-@SuppressWarnings("serial")
+
 @Entity
 @Table(name = "volo")
-public class Volo implements Serializable{  
+public class Volo {  
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -31,16 +30,16 @@ public class Volo implements Serializable{
 	@Column(nullable=false)
 	private Date dataArrivo;
 	
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne
 	private Aeroporto AeroportoPartenza;
 
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne
 	private Aeroporto AeroportoArrivo;
 	
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne
 	private CompagniaAerea compagnia;
 	
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@ManyToOne
 	private Aereo aereo;
 		
 	public Volo(Date dataPartenza, Date dataArrivo, Aeroporto AeroportoPartenza,

@@ -1,7 +1,9 @@
 package com.samuele.orm.services;
 
+import java.util.Date;
 import java.util.List;
 
+import com.samuele.orm.entities.Aeroporto;
 import com.samuele.orm.entities.Volo;
 import com.samuele.orm.repositories.VoloRepository;
 
@@ -24,6 +26,7 @@ public class VoloService implements Services<Volo, Long> {
 	public Volo get(Long id) {
 		repo.open();
 		Volo trovato = repo.get(id);
+		repo.close();
 		return trovato;
 	}
 

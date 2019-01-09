@@ -1,28 +1,28 @@
 package com.samuele.orm.repositories;
  
-import org.junit.AfterClass;
+import org.junit.AfterClass; 
 import org.junit.Before;
 import org.junit.Test;          
-import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.test.context.junit4.SpringRunner;
+//import org.junit.runner.RunWith;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+//import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+//import org.springframework.test.context.junit4.SpringRunner;
 
 import com.samuele.orm.dbManager.DBManager;
-import com.samuele.orm.entities.Aereo;
+//import com.samuele.orm.entities.Aereo;
 import com.samuele.orm.entities.Aeroporto;
-import com.samuele.orm.repositories.AeroportoRepository;
+//import com.samuele.orm.repositories.AeroportoRepository;
 import com.samuele.orm.services.AeroportoService;
 
-import static org.assertj.core.api.Assertions.assertThat;
+//import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 
 import java.util.List;
-import java.util.Optional;
+//import java.util.Optional;
 
-@RunWith(SpringRunner.class)
-@DataJpaTest
+//@RunWith(SpringRunner.class)
+//@DataJpaTest
 public class AeroportoRepositoryTest {
 	
 	private AeroportoService service;
@@ -32,12 +32,12 @@ public class AeroportoRepositoryTest {
 	}
 	
 	@Before
-	public void setUp(){
+	public void setUp() {
 		DBManager.dropDB();
 	}
 	
 	@AfterClass
-	public static void after(){
+	public static void cleanDB() {
 		DBManager.dropDB();
 	}
 	
@@ -52,10 +52,6 @@ public class AeroportoRepositoryTest {
 		List<Aeroporto> aeroporti = service.getAll();
 		
 		assertEquals(2, aeroporti.size());
-		
-		drop(a1);
-		drop(a2);
-
 	}
 	
 	@Test
@@ -75,9 +71,6 @@ public class AeroportoRepositoryTest {
 		assertEquals(a2.getId(), fiumicino.getId());
 		assertEquals(a2.getCittà(), fiumicino.getCittà());
 		assertEquals(a2.getNazione(), fiumicino.getNazione());
-		
-		drop(a1);
-		drop(a2);
 	}
 	
 	@Test
@@ -96,10 +89,6 @@ public class AeroportoRepositoryTest {
 		
 		assertEquals(2, aeroporti.size());
 		assertEquals("Busto", service.get(a1.getId()).getCittà());
-		
-		drop(a1);
-		drop(a2);
-		
 	}
 	
 	@Test
@@ -117,16 +106,20 @@ public class AeroportoRepositoryTest {
 		
 		assertEquals(1, aeroporti.size());
 		assertEquals(a2.getId(), aeroporti.get(0).getId());
-		
-		drop(a2);	
 	}
 	
 	@Test
 	public void testSearch() {
 		
-	}
-	
-	public void drop(Aeroporto aeroporto) {
-		service.delete(aeroporto);
+		Aeroporto a1 = new Aeroporto("Malpensa", "Milano", "Italia");
+		Aeroporto a2 = new Aeroporto("Fiumicino", "Roma", "Italia");
+		
+		service.save(a1);
+		service.save(a2);
+		
+		List<Aeroporto> aeroporti = service.search("città", "Milano");
+		
+		assertEquals(1, aeroporti.size());
+		
 	}
 }

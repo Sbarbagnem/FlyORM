@@ -2,6 +2,8 @@ package com.samuele.orm.repositories;
 
 import java.util.List;
 
+import javax.persistence.Query;
+
 import com.samuele.orm.entities.CompagniaAerea;
 
 public class CompagniaAereaRepository extends Repository<CompagniaAerea, Long> {
@@ -43,7 +45,8 @@ public class CompagniaAereaRepository extends Repository<CompagniaAerea, Long> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<CompagniaAerea> search(String field, String value) {
-		String query = "SELECT m FROM CompagniaAerea m WHERE m." + field + " LIKE '%"+value+"%'";
-    	return getEntityManager().createQuery(query).getResultList();
+		Query q = getEntityManager().createQuery("SELECT a FROM CompagniaAerea a WHERE a." + field + " LIKE :value");
+		q =	q.setParameter("value", value);
+		return	q.getResultList();
 	}
 }

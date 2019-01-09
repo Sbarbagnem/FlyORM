@@ -1,22 +1,22 @@
 package com.samuele.orm.repositories;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertEquals; 
 
 import java.util.List;
 
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.junit4.SpringRunner;
+//import org.junit.runner.RunWith;
+//import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+//import org.springframework.test.context.junit4.SpringRunner;
 
 import com.samuele.orm.dbManager.DBManager;
 import com.samuele.orm.entities.CompagniaAerea;
 import com.samuele.orm.services.CompagniaAereaService;
  
-@RunWith(SpringRunner.class)
-@DataJpaTest
+//@RunWith(SpringRunner.class)
+//@DataJpaTest
 public class CompagniaAereaRepositoryTest {
 	
 	private CompagniaAereaService service;
@@ -27,12 +27,12 @@ public class CompagniaAereaRepositoryTest {
 
 	
 	@Before
-	public void setUp(){
+	public void setUp() {
 		DBManager.dropDB();
 	}
 	
 	@AfterClass
-	public static void after(){
+	public static void cleanDB() {
 		DBManager.dropDB();
 	}
 	
@@ -49,10 +49,6 @@ public class CompagniaAereaRepositoryTest {
 		List<CompagniaAerea> compagnie = service.getAll();
 		
 		assertEquals(3, compagnie.size());
-		
-		drop(c1);
-		drop(c2);
-		drop(c3);
 	}
 	
 	@Test
@@ -70,10 +66,6 @@ public class CompagniaAereaRepositoryTest {
 		
 		assertEquals(nome1.getNome(), c1.getNome());
 		assertEquals(nome1.getNazione(), c1.getNazione());
-		
-		drop(c1);
-		drop(c2);
-		drop(c3);
 	}
 	
 	@Test
@@ -88,7 +80,6 @@ public class CompagniaAereaRepositoryTest {
 		
 		assertEquals(1, compagnie.size());
 		assertEquals("nome1.1", compagnie.get(0).getNome());
-		drop(c1);
 	}
 	
 	@Test
@@ -107,19 +98,28 @@ public class CompagniaAereaRepositoryTest {
 		
 		assertEquals(2, compagnie.size());
 		assertEquals(c2.getId(), compagnie.get(0).getId());
-		assertEquals(c3.getId(), compagnie.get(1 ).getId());
-		
-		drop(c2);
-		drop(c3);
-		
+		assertEquals(c3.getId(), compagnie.get(1 ).getId());		
 	}
 	
 	@Test
 	public void testSearch() {
 		
-	}
-	
-	public void drop(CompagniaAerea c) {
-		service.delete(c);
+		CompagniaAerea c1 = new CompagniaAerea("nome1", "Italia", null);
+		CompagniaAerea c2 = new CompagniaAerea("nome2", "Italia", null);
+		CompagniaAerea c3 = new CompagniaAerea("nome3", "Germania", null);
+		
+		service.save(c1);
+		service.save(c2);
+		service.save(c3);
+		
+		List<CompagniaAerea> compagnie = service.search("nazione", "Italia");
+		
+		assertEquals(2, compagnie.size());
+		
+		compagnie = service.search("nome", "nome1");
+		
+		assertEquals(1, compagnie.size());
+		assertEquals("nome1", compagnie.get(0).getNome());
+		assertEquals("Italia", compagnie.get(0).getNazione());
 	}
 }

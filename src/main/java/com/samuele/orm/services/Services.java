@@ -1,6 +1,6 @@
 package com.samuele.orm.services;
 
-import java.io.Serializable;
+import java.io.Serializable; 
 import java.util.List;
 
 public interface Services<T, id extends Serializable> {

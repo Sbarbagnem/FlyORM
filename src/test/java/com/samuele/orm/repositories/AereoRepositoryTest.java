@@ -1,6 +1,5 @@
 package com.samuele.orm.repositories;
-
-import static org.junit.Assert.assertEquals; 
+import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
@@ -26,20 +25,20 @@ public class AereoRepositoryTest {
 	}	
 	
 	@Before
-	public void setUp(){
+	public void setUp() {
 		DBManager.dropDB();
 	}
 	
 	@AfterClass
-	public static void after(){
+	public static void cleanDB() {
 		DBManager.dropDB();
 	}
 	
 	@Test
 	public void testCreate() {
 		
-		Aereo a1 = new Aereo("Airbus", "A300");
-		Aereo a2 = new Aereo("Boeing", "757");
+		Aereo a1 = new Aereo("Airbus", "A301");
+		Aereo a2 = new Aereo("Boeing", "758");
 		
 		service.save(a1);
 		service.save(a2);
@@ -48,30 +47,19 @@ public class AereoRepositoryTest {
 		
 		// testo che abbia salvato i due oggetti
 		assertEquals(2, aerei.size());
-		
-		// testo che gli Id degli oggetti salvati siano quelli degli oggetti creati
-		assertEquals(a1.getId(), aerei.get(0).getId());
-		assertEquals(a2.getId(), aerei.get(1).getId());
-		
-		drop(a1);
-		drop(a2);
 	}
 
 	@Test
 	public void testRead() {
 		
 		Aereo a1 = new Aereo("Airbus", "A300");
-		Aereo a2 = new Aereo("Boeing", "757");
 		
 		service.save(a1);
-		service.save(a2);
 		
 		Aereo trovato = service.get(a1.getId());
 		
 		assertEquals(trovato.getId(), a1.getId());
 		
-		drop(a1);
-		drop(a2);
 	}
 
 	@Test
@@ -87,12 +75,11 @@ public class AereoRepositoryTest {
 		
 		service.edit(a1);
 		
-		List<Aereo> aerei = service.getAll();
+		Aereo trovato = service.get(a1.getId());
 		
-		assertEquals(2, aerei.size());
-		assertEquals("NuovoModello", aerei.get(0).getModello());
+		assertEquals("NuovoModello", trovato.getModello());
 	}
-	
+
 	@Test
 	public void testDelete() {
 		
@@ -105,36 +92,25 @@ public class AereoRepositoryTest {
 		service.delete(a1);
 		
 		List<Aereo> aerei = service.getAll();
-		
-		assertEquals(1, aerei.size());
+
 		assertEquals(false, aerei.contains(a1));	
-		
-		drop(a2);
+
 	}
 	
-//	@Test
-//	public void testSearch() {
-//		Aereo a1 = new Aereo("Airbus", "100");
-//		Aereo a2 = new Aereo("Boing", "B100");
-//		Aereo a3 = new Aereo("Airbus", "200");
-//		Aereo a4 = new Aereo("Airbus", "200");
-//		
-//		service.save(a1);
-//		service.save(a2);
-//		service.save(a3);
-//		service.save(a4);
-//		
-//		List<Aereo> aerei_airbus = service.search("Marca", "Airbus");
-//		
-//		assertEquals(3, aerei_airbus.size());
-//		
-//		drop(a1);
-//		drop(a2);
-//		drop(a3);
-//		drop(a4);
-//	}
-	
-	public void drop(Aereo aereo) {
-		service.delete(aereo);
+	@Test
+	public void testSearch() {
+		Aereo a1 = new Aereo("Airbus", "100");
+		Aereo a2 = new Aereo("Boing", "B100");
+		Aereo a3 = new Aereo("Airbus", "200");
+		Aereo a4 = new Aereo("Airbus", "201");
+		
+		service.save(a1);
+		service.save(a2);
+		service.save(a3);
+		service.save(a4);
+		
+		List<Aereo> aerei_airbus = service.search("marca", "Airbus");
+		
+		assertEquals(3, aerei_airbus.size());
 	}
 }

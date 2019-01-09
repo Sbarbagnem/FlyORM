@@ -1,6 +1,6 @@
 package com.samuele.orm.repositories;
 
-import java.io.Serializable;
+import java.io.Serializable; 
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -11,7 +11,7 @@ public abstract class Repository<T, ID extends Serializable>{
 	private static EntityManager em;
 	
 	static {
-		em = Persistence.createEntityManagerFactory("fly").createEntityManager();
+		em = Persistence.createEntityManagerFactory("flyDB").createEntityManager();
 	}
 	
 	abstract T create(T entity);
@@ -40,6 +40,4 @@ public abstract class Repository<T, ID extends Serializable>{
 	public void rollback() {
 		em.getTransaction().rollback();
 	}
-
-
 }

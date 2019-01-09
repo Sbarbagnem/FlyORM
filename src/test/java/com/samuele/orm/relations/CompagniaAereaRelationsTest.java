@@ -1,18 +1,18 @@
 package com.samuele.orm.relations;
 
-import static org.junit.Assert.assertEquals;   
+import static org.junit.Assert.assertEquals;    
 
 import java.util.List;
 
+import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import com.samuele.orm.dbManager.DBManager;
 import com.samuele.orm.entities.CompagniaAerea;
-import com.samuele.orm.repositories.CompagniaAereaRepository;
 import com.samuele.orm.services.CompagniaAereaService;
 
 @RunWith(SpringRunner.class)
@@ -23,6 +23,16 @@ public class CompagniaAereaRelationsTest {
 	
 	public CompagniaAereaRelationsTest(){
 		this.service = new CompagniaAereaService();
+	}
+	
+	@Before
+	public void setUp() {
+		DBManager.dropDB();
+	}
+	
+	@AfterClass
+	public static void cleanDB() {
+		DBManager.dropDB();
 	}
 	
 	@Test
@@ -51,8 +61,6 @@ public class CompagniaAereaRelationsTest {
 		// controllo che eliminando l'entità padre mi elimina anche le figlie
 		assertEquals(1, c.size());
 
-		drop(c2);
-
 	}
 
 	@Test
@@ -79,13 +87,5 @@ public class CompagniaAereaRelationsTest {
 		
 		assertEquals(3, c.size());
 		
-		drop(c1);
-		drop(c2);
-		
 	}
-	
-	public void drop(CompagniaAerea c) {
-		service.delete(c);
-	}
-
 }

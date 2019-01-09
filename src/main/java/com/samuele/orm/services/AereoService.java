@@ -17,9 +17,9 @@ public class AereoService implements Services<Aereo, Long> {
 	public Aereo save(Aereo t) {
 		
 		repo.open();
-		repo.create(t);
+		Aereo a = repo.create(t);
 		repo.close();
-		return t;
+		return a;
 	}
 
 	@Override

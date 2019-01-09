@@ -7,16 +7,17 @@ public class DBManager {
 	
 	public static void dropDB() {
 		
-		EntityManager em = Persistence.createEntityManagerFactory("fly").createEntityManager();
+		EntityManager entityManager = Persistence.createEntityManagerFactory("flyDB").createEntityManager();
 		
-		String query = "TRUNCATE ";
-		em.getTransaction().begin();
-		em.createNativeQuery(query + "aereo").executeUpdate();
-		em.createNativeQuery(query + "aeroporto").executeUpdate();
-		em.createNativeQuery(query + "compagniaAerea").executeUpdate();
-		em.createNativeQuery(query + "volo").executeUpdate();
-		em.getTransaction().commit();
-		em.close();
+		String query = "DELETE IGNORE FROM ";
+		
+		entityManager.getTransaction().begin();
+		entityManager.createNativeQuery(query + "volo").executeUpdate();
+		entityManager.createNativeQuery(query + "aereo").executeUpdate();
+		entityManager.createNativeQuery(query + "aeroporto").executeUpdate();
+		entityManager.createNativeQuery(query + "compagniaAerea").executeUpdate();
+		entityManager.getTransaction().commit();
+		entityManager.close();
 	}
 
 }

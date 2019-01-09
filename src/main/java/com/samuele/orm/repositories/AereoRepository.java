@@ -1,6 +1,8 @@
 package com.samuele.orm.repositories;
 
-import java.util.List; 
+import java.util.List;
+
+import javax.persistence.Query;
 
 import com.samuele.orm.entities.Aereo;
 
@@ -43,7 +45,8 @@ public class AereoRepository extends Repository<Aereo, Long> {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Aereo> search(String field, String value) {
-		String query = "SELECT m FROM Aereo WHERE m." + field + " = " + value;
-    	return getEntityManager().createQuery(query).getResultList();
+		Query q = getEntityManager().createQuery("SELECT a FROM Aereo a WHERE a." + field + " LIKE :value");
+		q =	q.setParameter("value", value);
+		return	q.getResultList();
 	}
 }
