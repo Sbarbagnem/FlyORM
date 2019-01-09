@@ -13,6 +13,7 @@ import javax.persistence.*;
 public class CompagniaAerea {
 	
 	@Id
+	@Column(name = "compagnia_id")
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
